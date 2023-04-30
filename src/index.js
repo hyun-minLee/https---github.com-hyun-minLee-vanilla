@@ -155,6 +155,7 @@ function initMap() {
     });
 
     let map = document.querySelector('.map');
+    navigator.geolocation.getCurrentPosition(function (position) {
     let option = {
         center: new kakao.maps.LatLng(postion.coords.latitude, postion.coords.longitude),
         level: 3   
@@ -164,6 +165,7 @@ function initMap() {
     }, function (error) {
         console.log(error);
     });
+});
 
 }
 
