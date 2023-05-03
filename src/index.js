@@ -145,6 +145,7 @@ function initMap() {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${postion.coords.latitude}&lon=${postion.coords.longitude}&appid=0253e735f1704ac96f97ff71cd7e81bb&lang=kr`;
     fetch(url).then(response => response.json()).then(data => {
         const name = data.name;
+        console.log(data);
         const temp = Math.ceil(Number(data.main.temp) - 273.15);
         const description = data.weather[0].description;
         weathercontainer.innerHTML = `
@@ -161,6 +162,13 @@ function initMap() {
         level: 3   
     };
     let kakaomap = new kakao.maps.Map(map,option);
+    kakaomap.panTo(option.center);
+    let marker = new kakao.maps.Marker({
+        position:option.center
+    });
+
+    marker.setMap(null);
+    marker.setMap(kakaomap);
             
     }, function (error) {
         console.log(error);
