@@ -21,6 +21,7 @@ window.onload = function() {
     let taskbutton = document.querySelector('.taskbutton');
     let checkboxlist = document.querySelector('.checkboxlist');
     const middlecontainer = document.querySelector('.middlecontainer');
+    
     taskbutton.addEventListener('click', function() {
     taskbutton.classList.toggle('active'); 
     const checkboxlist = document.createElement('div');
@@ -74,6 +75,8 @@ signin_btn.addEventListener("click", function(e) {
             title.innerHTML=`${user.name}의 To do List`;
             writetask.placeholder =`${user.name}님 할 일을 기록하세요.`;
             signin.style.opacity='0';
+            btnSignOut.style.display="block";
+            btnSignOut.style.opacity=0.5;
         }
     });
 
@@ -90,6 +93,56 @@ const userinput = document.querySelectorAll('.container--signup .input')[0];
 const emailinput = document.querySelectorAll('.container--signup .input')[1];
 const pwdinput = document.querySelectorAll('.container--signup .input')[2];
 const btn = document.querySelector('.container--signup .btn');
+const leftcontainer2 = document.querySelector('.leftcontainer2');
+const leftcontainer1 = document.querySelector('.leftcontainer1');
+const btnSignitems = document.querySelectorAll('.btnSign button');
+const btnSignOut= document.querySelector('.btnSignOut');
+const colors = [
+    "#ef5777",
+    "#575fcf",
+    "#4bcffa",
+    "#34e7e4",
+    "#0be881",
+    "#f53b57",
+    "#3c40c6",
+    "#0fbcf9",
+    "#00d8d6",
+    "#05c46b",
+    "#ffc048",
+    "#ffdd59",
+    "#ff5e57",
+    "#d2dae2",
+    "#485460",
+    "#ffa801",
+    "#ffd32a",
+    "#ff3f34"
+  ];
+
+for(let i=0; i<btnSignitems.length; i++) {
+    btnSignitems[i].addEventListener("click", function() {
+        let random1 = Math.floor(Math.random()* colors.length);
+        let random2 = Math.floor(Math.random()* colors.length);
+        let background = `linear-gradient(${colors[random1]}, ${colors[random2]})`;
+        btnSignitems[i].style.background = background;
+
+        if(btnSignitems[i].innerHTML==="Sign In") { 
+            leftcontainer1.classList.toggle("addanimation");
+            if(leftcontainer1.classList.contains("addanimation")) {
+                leftcontainer1.style.maxHeight = leftcontainer1.scrollHeight+"px"; 
+            } 
+            btnSignitems[i].style.display='none';
+            btnSignitems[i+1].style.display='none';
+        } else {
+            leftcontainer2.classList.toggle("addanimation");
+            if(leftcontainer2.classList.contains("addanimation")) {
+                leftcontainer2.style.maxHeight = leftcontainer2.scrollHeight+"px"; 
+            }
+            btnSignitems[i-1].style.display='none';
+            btnSignitems[i].style.display='none';
+
+        }
+    });
+}
 
 btn.addEventListener("click", function(e) {
     e.preventDefault();
@@ -108,7 +161,11 @@ btn.addEventListener("click", function(e) {
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     alert("회원가입이 완료되었습니다.");
-    signup.style.opacity="0";
+    leftcontainer2.style.opacity="0";
+    setTimeout(function() {
+        leftcontainer2.style.display = "none";
+      }, 2000);
+
     }
     
 });

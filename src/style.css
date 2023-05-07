@@ -246,12 +246,50 @@ body {
 .leftcontainer1 {
     height: 45vh;
     width: 100%;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+    /* display: none; */
+
 }
 
 .leftcontainer2 {
     height: 45vh;
     width: 100%;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+    /* display: none; */
 }
+
+.addanimation {
+    opacity: 0.5;
+    max-height: 100px;
+}
+
+.btnSign {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btnSign button {
+    font-size: 2rem;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    /* color: whitesmoke; */
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(-225deg, #B6CEE8 0%, #F578DC 100%);
+}
+
+.btnSignOut {
+
+    display: none;
+}
+
 
 .weather-container {
     display: flex;
@@ -317,4 +355,3 @@ h1 {
     transform: scale(0.95);
     border: solid 2px gray;
 }
-
