@@ -16,16 +16,20 @@ window.onload = function() {
     setInterval(setClock, 1000);
 
     initMap();
+    let todoList = [];
+    
     const title = document.querySelector('.title');
     let writetask = document.querySelector('.writetask');
     let taskbutton = document.querySelector('.taskbutton');
     let checkboxlist = document.querySelector('.checkboxlist');
     const middlecontainer = document.querySelector('.middlecontainer');
-    
+
     taskbutton.addEventListener('click', function() {
+    let todoObject = {};
     taskbutton.classList.toggle('active'); 
     const checkboxlist = document.createElement('div');
     checkboxlist.setAttribute('class', 'checkboxlist');
+    checkboxlist.id = Date.now();
     const new_checkbox = document.createElement('input');
     new_checkbox.type = 'checkbox';
     new_checkbox.setAttribute('class', 'checkbox');
@@ -35,8 +39,15 @@ window.onload = function() {
     img.src="src/휴지통.png";
     label.setAttribute('class', 'checkboxlabel');
     
+    
     new_checkbox.innerText=writetask.value;
     label.innerText=writetask.value;
+    todoObject.id = checkboxlist.id;
+    todoObject.text = writetask.value;
+    todoList.push(todoObject);
+
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+
     middlecontainer.appendChild(checkboxlist);
     checkboxlist.appendChild(new_checkbox);
     checkboxlist.appendChild(label);
@@ -50,6 +61,15 @@ window.onload = function() {
                 img.classList.toggle('imgclick');
             });
             img.addEventListener('click', function() {
+                let getList = localStorage.getItem("todoList");
+                let parseList = JSON.parse(getList);
+                todoList=[];
+                parseList.forEach(list => {
+                    if(list.id !== checkboxlist.id) {
+                        todoList.push(list);
+                    }
+                });
+                console.log(todoList);
                 checkboxlist.remove();
             });
         } else {
